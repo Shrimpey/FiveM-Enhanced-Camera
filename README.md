@@ -12,7 +12,7 @@ Main features of this menu:
 
 ## Installation
 
-TBD
+Go to [releases](https://github.com/Shrimpey/EnhancedCamera/releases) and download latest zipped release. Unzip and place ``enhancedcamera`` folder inside your server's ``resources`` folder, then edit your server.cfg to include line ``start enhancedcamera``.
 
 ## Parameters overview
 
