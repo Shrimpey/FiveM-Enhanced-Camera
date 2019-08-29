@@ -3,6 +3,10 @@
 ## Overview of the menu
 This menu recreates vehicle camera from scratch and introduces a number of customizable parameters for user to tune. On top of that there is a drone camera with a few modes to simulate drone flight.
 
+<p align="center">
+<img src="https://i.ibb.co/jfL3nmd/pic1.jpg">
+</p>
+
 Main features of this menu:
 - **Lead camera** - main camera, rotates around car dependant on angular velocity of the vehicle
 - **Chase camera** - focuses on closest vehicle and points towards it
