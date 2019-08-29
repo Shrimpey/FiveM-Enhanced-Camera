@@ -35,7 +35,9 @@ It's best to just experiment with parameters to see how they affect camera handl
 - **X/Y/Z Offset** - static position offset in XYZ direction
 - **Max angle to lock** - for chase camera only, max angle from velocity vector to keep the lock on, if angle exceeds this limit, camera switches back to normal. (25,360)
 
-## Examples
+## Examples/showcase
+
+[![Showcase](https://img.youtube.com/vi/JL7sxyNec_g/0.jpg)](https://youtu.be/JL7sxyNec_g)
 
 ## Credits
 - [Tom Grobbe](https://github.com/TomGrobbe) - [MenuAPI](https://github.com/TomGrobbe/MenuAPI) used for GUI, code snippets from [vMenu](https://github.com/TomGrobbe/vMenu) used for saving/loading camera parameters
