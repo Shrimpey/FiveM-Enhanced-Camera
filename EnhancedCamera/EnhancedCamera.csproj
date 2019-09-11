@@ -38,12 +38,9 @@
     <Reference Include="CitizenFX.Core.Client">
       <HintPath>F:\Fivem\FiveM.app\citizen\clr2\lib\mono\4.5\CitizenFX.Core.Client.dll</HintPath>
     </Reference>
-    <Reference Include="MenuAPI">
-      <HintPath>..\dependencies\client\MenuAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="NativeUI.net, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MenuAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\FiveM\ServerData\resources\PlaygroundScripts\NativeUI.net.dll</HintPath>
+      <HintPath>..\dependencies\client\MenuAPI.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\vStancer+sl_sh\fivem-vstancer\VStancer.Client\Newtonsoft.Json.dll</HintPath>

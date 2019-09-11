@@ -18,6 +18,8 @@ namespace CustomCamera
         private static MenuCheckboxItem chaseCam;
         private static MenuCheckboxItem droneCam;
         private static Control MenuToggleControl;
+        private static bool chaseCameraConfigEnabled;
+        private static bool droneCameraConfigEnabled;
 
         // Public variables
         public static CustomCam CustomCamMenu { get; private set; }
@@ -39,6 +41,20 @@ namespace CustomCamera
             SetConfigParameters();
             // Setup main menu and submenus
             CreateSubmenus();
+            // Register console command
+            RegisterCommand("enhancedCam", new Action<int>((source) => {
+                if (MenuController.IsAnyMenuOpen()) {
+                    MenuController.CloseAllMenus();
+                } else {
+                    MenuController.MainMenu.OpenMenu();
+                }
+            }), false);
+            // Right align menu
+            try {
+                MenuController.MenuAlignment = MenuController.MenuAlignmentOption.Right;
+            }catch(Exception e) {
+                Debug.WriteLine("[EnhancedCamera] Exception: Cannot align menu to the right.");
+            }
             // Initiate tick
             Tick += OnTick;
             Tick += GeneralUpdate;
@@ -91,9 +107,11 @@ namespace CustomCamera
             #region adding menu items
             // Checkboxes
             Menu.AddMenuItem(leadCam);
-            Menu.AddMenuItem(chaseCam);
-            Menu.AddMenuItem(droneCam);
-
+            if(chaseCameraConfigEnabled)
+                Menu.AddMenuItem(chaseCam);
+            if(droneCameraConfigEnabled)
+                Menu.AddMenuItem(droneCam);
+            
             // Custom cam parameters menu
             CustomCamMenu = new CustomCam();
             Menu customCamMenu = CustomCamMenu.GetMenu();
@@ -110,7 +128,9 @@ namespace CustomCamera
             {
                 Label = "→→→"
             };
-            AddMenu(Menu, droneCamMenu, buttonDrone);
+
+            if (droneCameraConfigEnabled)
+                AddMenu(Menu, droneCamMenu, buttonDrone);
 
             // Credits
             MenuItem credits = new MenuItem("Credits",  "~g~Shrimp~s~ - idea and execution\n" +
@@ -403,6 +423,8 @@ namespace CustomCamera
 
         private static void SetConfigParameters() {
             Dictionary<string, string> config = LoadConfig();
+
+            // Set menu key
             config.TryGetValue("toggleMenu", out string value);
             if (int.TryParse(value, out int result)) {
                 MenuToggleControl = (Control)result;
@@ -410,6 +432,22 @@ namespace CustomCamera
                 MenuToggleControl = (Control)344;
             }
             MenuController.MenuToggleKey = MenuToggleControl;
+
+            // Set chase and drone camera bools
+            config.TryGetValue("chaseCameraEnabled", out string chaseCamEnabledStr);
+            if (int.TryParse(chaseCamEnabledStr, out int chaseCamEnabled)) {
+                chaseCameraConfigEnabled = (chaseCamEnabled==1)?(true):(false);
+            } else {
+                chaseCameraConfigEnabled = true;
+            }
+
+            config.TryGetValue("droneCameraEnabled", out string droneCameraEnabledStr);
+            if (int.TryParse(droneCameraEnabledStr, out int droneCameraEnabled)) {
+                droneCameraConfigEnabled = (droneCameraEnabled == 1) ? (true) : (false);
+            } else {
+                droneCameraConfigEnabled = true;
+            }
+
         }
 
         public static async Task<string> GetUserInput(string windowTitle, string defaultText, int maxInputLength)
