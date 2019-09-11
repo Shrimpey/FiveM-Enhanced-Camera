@@ -3,6 +3,10 @@
 ## Overview of the menu
 This menu recreates vehicle camera from scratch and introduces a number of customizable parameters for user to tune. On top of that there is a drone camera with a few modes to simulate drone flight.
 
+<p align="center">
+<img src="https://i.ibb.co/jfL3nmd/pic1.jpg">
+</p>
+
 Main features of this menu:
 - **Lead camera** - main camera, rotates around car dependant on angular velocity of the vehicle
 - **Chase camera** - focuses on closest vehicle and points towards it
@@ -31,7 +35,9 @@ It's best to just experiment with parameters to see how they affect camera handl
 - **X/Y/Z Offset** - static position offset in XYZ direction
 - **Max angle to lock** - for chase camera only, max angle from velocity vector to keep the lock on, if angle exceeds this limit, camera switches back to normal. (25,360)
 
-## Examples
+## Examples/showcase
+
+[![Showcase](https://img.youtube.com/vi/JL7sxyNec_g/0.jpg)](https://youtu.be/JL7sxyNec_g)
 
 ## Credits
 - [Tom Grobbe](https://github.com/TomGrobbe) - [MenuAPI](https://github.com/TomGrobbe/MenuAPI) used for GUI, code snippets from [vMenu](https://github.com/TomGrobbe/vMenu) used for saving/loading camera parameters
