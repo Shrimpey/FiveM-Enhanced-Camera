@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
@@ -37,6 +37,8 @@ namespace CustomCamera
         /// Constructor.
         /// </summary>
         public MainMenu() {
+            // Disable menu opening via gamepad (interferes with vMenu)
+            MenuController.EnableMenuToggleKeyOnController = false;
             // Setup menu open/close key
             SetConfigParameters();
             // Setup main menu and submenus
