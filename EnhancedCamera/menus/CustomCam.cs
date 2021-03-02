@@ -55,7 +55,7 @@ namespace CustomCamera
         private Menu menu;
         private Dictionary<MenuItem, KeyValuePair<string, CameraInfo>> scMenuItems = new Dictionary<MenuItem, KeyValuePair<string, CameraInfo>>();
         private Menu savedCamerasMenu;
-        private Menu selectedCameraMenu = new Menu("Manage Camera", "Manage this saved camera.");
+        private Menu selectedCameraMenu = new Menu(_t("CUSTOM_CAM_MANAGE"), _t("CUSTOM_CAM_MANAGE_DESC"));
         private static KeyValuePair<string, CameraInfo> currentlySelectedCamera = new KeyValuePair<string, CameraInfo>();
 
         #endregion
@@ -123,16 +123,16 @@ namespace CustomCamera
 
         private void CreateMenu()
         {
-            menu = new Menu("Enhanced camera", "Lead/chase camera parameters");
+            menu = new Menu(_t("CUSTOM_CAM_TITLE"), _t("CUSTOM_CAM_DESC"));
 
             #region checkbox items
 
             // Lock position offset
-            lockPosOffsetCheckbox = new MenuCheckboxItem("Lock position offset", "Locks position offset, useful when sticking camera to the car - on top of hood, as FPV cam, etc.", false);
+            lockPosOffsetCheckbox = new MenuCheckboxItem(_t("CUSTOM_CAM_LOCK_POSITION"), _t("CUSTOM_CAM_LOCK_POSITION_DESC"), false);
             // Linear position offset
-            linearPosCheckbox = new MenuCheckboxItem("Linear position offset", "Instead of circular motion around the car, the camera moves along car's X axis. Dope for cinematic shots.", false);
+            linearPosCheckbox = new MenuCheckboxItem(_t("CUSTOM_CAM_LINEAR"), _t("CUSTOM_CAM_LINEAR_DESC"), false);
             // Lock to ped
-            pedLockCheckbox = new MenuCheckboxItem("Lock rotation to camera plane", "Changes the way that camera rotates around car (mostly visible on uneven ground).", false);
+            pedLockCheckbox = new MenuCheckboxItem(_t("CUSTOM_CAM_LOCK_ROTATE"), _t("CUSTOM_CAM_LOCK_ROTATE_DESC"), false);
 
             #endregion
 
@@ -144,7 +144,7 @@ namespace CustomCamera
             {
                 angCamModifierValues.Add(i.ToString("0.000"));
             }
-            angCamModifierList = new MenuListItem("Modifier", angCamModifierValues, 48, "This modifier * angular velocity = target rotation. Higher values make camera move further from lock. (-1,1)")
+            angCamModifierList = new MenuListItem(_t("CUSTOM_CAM_MODIFIER"), angCamModifierValues, 48, _t("CUSTOM_CAM_MODIFIER_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -155,7 +155,7 @@ namespace CustomCamera
             {
                 angCamInterpolationValues.Add(i.ToString("0.000"));
             }
-            angCamInterpolationList = new MenuListItem("Yaw interpolation", angCamInterpolationValues, 4, "Lower values - smoother movement. WARNING: Slider is inversed for chase camera - 0 is max interpolation, 1 is complete lock. (0,1)")
+            angCamInterpolationList = new MenuListItem(_t("CUSTOM_CAM_YAW"), angCamInterpolationValues, 4, _t("CUSTOM_CAM_YAW_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -166,7 +166,7 @@ namespace CustomCamera
             {
                 rollInterpolationValues.Add(i.ToString("0.000"));
             }
-            rollInterpolationList = new MenuListItem("Roll interpolation", rollInterpolationValues, 20, "Lower values - smoother movement. (0,1)")
+            rollInterpolationList = new MenuListItem(_t("CUSTOM_CAM_ROLL"), rollInterpolationValues, 20, _t("CUSTOM_CAM_ROLL_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -177,7 +177,7 @@ namespace CustomCamera
             {
                 pitchInterpolationValues.Add(i.ToString("0.000"));
             }
-            pitchInterpolationList = new MenuListItem("Pitch interpolation", pitchInterpolationValues, 20, "Lower values - smoother movement. (0,1)")
+            pitchInterpolationList = new MenuListItem(_t("CUSTOM_CAM_PITCH"), pitchInterpolationValues, 20, _t("CUSTOM_CAM_PITCH_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -188,7 +188,7 @@ namespace CustomCamera
             {
                 chaseCamOffsetValues.Add((i).ToString("0.000"));
             }
-            chaseCamOffsetList = new MenuListItem("Camera offset", chaseCamOffsetValues, 0, "Offsets chase camera target towards its velocity vector. (0,5)")
+            chaseCamOffsetList = new MenuListItem(_t("CUSTOM_CAM_OFFSET"), chaseCamOffsetValues, 0, _t("CUSTOM_CAM_OFFSET_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -199,7 +199,7 @@ namespace CustomCamera
             {
                 posInterpolationValues.Add(i.ToString("0.00"));
             }
-            posInterpolationList = new MenuListItem("Position interpolation", posInterpolationValues, 100, "Lower values - smoother movement, higher delay. (0,1)")
+            posInterpolationList = new MenuListItem(_t("CUSTOM_CAM_POSITION"), posInterpolationValues, 100, _t("CUSTOM_CAM_POSITION_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -210,7 +210,7 @@ namespace CustomCamera
             {
                 customCamFOVValues.Add((i).ToString());
             }
-            customCamFOVList = new MenuListItem("FOV", customCamFOVValues, 43, "Change custom camera's FOV. (20,120)")
+            customCamFOVList = new MenuListItem(_t("CUSTOM_CAM_FOV"), customCamFOVValues, 43, _t("CUSTOM_CAM_FOV_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -221,7 +221,7 @@ namespace CustomCamera
             {
                 customCamForwardOffsetValues.Add((i).ToString("0.000"));
             }
-            customCamForwardOffsetList = new MenuListItem("Y offset", customCamForwardOffsetValues, 130, "Custom camera offset in forward direction. (-8,8)")
+            customCamForwardOffsetList = new MenuListItem(_t("CUSTOM_CAM_Y_OFFSET"), customCamForwardOffsetValues, 130, _t("CUSTOM_CAM_Y_OFFSET_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -231,7 +231,7 @@ namespace CustomCamera
             {
                 customCamSideOffsetValues.Add((i).ToString("0.000"));
             }
-            customCamSideOffsetList = new MenuListItem("X offset", customCamSideOffsetValues, 200, "Custom camera offset in side direction. (-5,8)")
+            customCamSideOffsetList = new MenuListItem(_t("CUSTOM_CAM_X_OFFSET"), customCamSideOffsetValues, 200, _t("CUSTOM_CAM_X_OFFSET_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -241,7 +241,7 @@ namespace CustomCamera
             {
                 customCamUpOffsetValues.Add((i).ToString("0.000"));
             }
-            customCamUpOffsetList = new MenuListItem("Z offset", customCamUpOffsetValues, 282, "Custom camera offset in up direction. (-5,8)")
+            customCamUpOffsetList = new MenuListItem(_t("CUSTOM_CAM_Z_OFFSET"), customCamUpOffsetValues, 282, _t("CUSTOM_CAM_Z_OFFSET_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -251,7 +251,7 @@ namespace CustomCamera
             {
                 chaseCamMaxAngleValues.Add(i.ToString());
             }
-            chaseCamMaxAngleList = new MenuListItem("Max angle to lock.", chaseCamMaxAngleValues, 67, "Max angle from velocity vector to keep the lock on, if angle exceeds this limit, camera switches back to normal. (25,360)")
+            chaseCamMaxAngleList = new MenuListItem(_t("CUSTOM_CAM_MAX_ANGLE"), chaseCamMaxAngleValues, 67, _t("CUSTOM_CAM_MAX_ANGLE_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -280,16 +280,16 @@ namespace CustomCamera
             menu.AddMenuItem(customCamSideOffsetList);
 
             // Presets
-            Menu presetsMenu = new Menu("Presets", "Spawn camera presets");
-            MenuItem tandemCamPreset = new MenuItem("Tandem Camera 1.0", "Chef's specialty")
+            Menu presetsMenu = new Menu(_t("CUSTOM_CAM_PRESETS"), _t("CUSTOM_CAM_PRESETS_DESC"));
+            MenuItem tandemCamPreset = new MenuItem(_t("CUSTOM_CAM_PRESETS_TANDEM"), _t("CUSTOM_CAM_PRESETS_TANDEM_DESC"))
             {
                 Label = $"→→→"
             };
-            MenuItem fpvCamPreset = new MenuItem("FPV camera base", "Best to use with chicken model")
+            MenuItem fpvCamPreset = new MenuItem(_t("CUSTOM_CAM_PRESETS_FPV"), _t("CUSTOM_CAM_PRESETS_FPV_DESC"))
             {
                 Label = $"→→→"
             };
-            MenuItem NFSCamPreset = new MenuItem("NFS camera", "Arcade game experience")
+            MenuItem NFSCamPreset = new MenuItem(_t("CUSTOM_CAM_PRESETS_NFS"), _t("CUSTOM_CAM_PRESETS_NFS_DESC"))
             {
                 Label = $"→→→"
             };
@@ -333,7 +333,7 @@ namespace CustomCamera
                 }
             };
 
-            MenuItem buttonPresets = new MenuItem("Presets menu", "Get started here")
+            MenuItem buttonPresets = new MenuItem(_t("CUSTOM_CAM_PRESETS_MENU"), _t("CUSTOM_CAM_PRESETS_MENU_DESC"))
             {
                 Label = "→→→"
             };
@@ -347,14 +347,14 @@ namespace CustomCamera
             #region managing save/load camera stuff
 
             // Saving/Loading cameras
-            MenuItem savedCamerasButton = new MenuItem("Saved cameras", "User created cameras");
+            MenuItem savedCamerasButton = new MenuItem(_t("CUSTOM_CAM_SAVED"), _t("CUSTOM_CAM_SAVED_DESC"));
             savedCamerasMenu = new Menu("Saved cameras");
             MenuController.AddSubmenu(menu, savedCamerasMenu);
             menu.AddMenuItem(savedCamerasButton);
             savedCamerasButton.Label = "→→→";
             MenuController.BindMenuItem(menu, savedCamerasMenu, savedCamerasButton);
 
-            MenuItem saveCamera = new MenuItem("Save Current Camera", "Save the current camera.");
+            MenuItem saveCamera = new MenuItem(_t("CUSTOM_CAM_SAVE_CURRENT"), _t("CUSTOM_CAM_SAVE_CURRENT_DESC"));
             savedCamerasMenu.AddMenuItem(saveCamera);
             savedCamerasMenu.OnMenuOpen += (sender) => {
                 savedCamerasMenu.ClearMenuItems();
@@ -382,9 +382,9 @@ namespace CustomCamera
             };
 
             MenuController.AddMenu(selectedCameraMenu);
-            MenuItem spawnCamera = new MenuItem("Spawn Camera", "Spawn this saved camera.");
-            MenuItem renameCamera = new MenuItem("Rename Camera", "Rename your saved camera.");
-            MenuItem deleteCamera = new MenuItem("~r~Delete Camera", "~r~This will delete your saved camera. Warning: this can NOT be undone!");
+            MenuItem spawnCamera = new MenuItem(_t("CUSTOM_CAM_SPAWN"), _t("CUSTOM_CAM_SPAWN_DESC"));
+            MenuItem renameCamera = new MenuItem(_t("CUSTOM_CAM_RENAME"), _t("CUSTOM_CAM_RENAME_DESC"));
+            MenuItem deleteCamera = new MenuItem(_t("CUSTOM_CAM_DELETE"), _t("CUSTOM_CAM_DELETE_DESC"));
             selectedCameraMenu.AddMenuItem(spawnCamera);
             selectedCameraMenu.AddMenuItem(renameCamera);
             selectedCameraMenu.AddMenuItem(deleteCamera);
@@ -1178,5 +1178,9 @@ namespace CustomCamera
         };
 
         #endregion
+
+        private static string _t(string key) {
+            return Language.get(key);
+        }
     }
 }
