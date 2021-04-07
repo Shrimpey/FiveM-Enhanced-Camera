@@ -18,7 +18,7 @@ namespace CustomCamera
         // Private variables
         private Menu menu;
         private Menu savedDronesMenu;
-        private Menu selectedDroneMenu = new Menu("Manage Drone", "Manage this saved drone parameters.");
+        private Menu selectedDroneMenu = new Menu(_t("DRONE_MANAGE_TITLE"), _t("DRONE_MANAGE_DESC"));
         private MenuListItem modeList;
         private Dictionary<MenuItem, KeyValuePair<string, DroneSaveInfo>> sdMenuItems = new Dictionary<MenuItem, KeyValuePair<string, DroneSaveInfo>>();
         private static KeyValuePair<string, DroneSaveInfo> currentlySelectedDrone = new KeyValuePair<string, DroneSaveInfo>();
@@ -81,21 +81,17 @@ namespace CustomCamera
 
         private void CreateMenu()
         {
-            menu = new Menu("Enhanced camera", "Drone Camera parameters");
+            menu = new Menu(_t("DRONE_TITLE"), _t("DRONE_DESC"));
 
             #region main parameters
 
             // Drone modes
-            List<string> modeListData = new List<string>() { "Race drone", "Zero-G drone", "Spectator drone", "Homing drone" };
-            modeList = new MenuListItem("Mode", modeListData, 0, "Select drone flight mode.\n" +
-                                                                    "~r~Race drone~s~ - regular, gravity based drone cam\n" +
-                                                                    "~g~Zero-G drone~s~ - gravity set to 0, added deceleration\n" +
-                                                                    "~b~Spectator drone~s~ - easy to operate for spectating\n" +
-                                                                    "~y~Homing drone~s~ - acquire target and keep it in center");
+            List<string> modeListData = new List<string>() { _t("DRONE_RACE"), _t("DRONE_ZERO_G"), _t("DRONE_SPECTATOR"), _t("DRONE_HOMING") };
+            modeList = new MenuListItem(_t("DRONE_MODE"), modeListData, 0, _t("DRONE_MODE_DESC"));
 
             // Invert input
-            invertPitch = new MenuCheckboxItem("Invert pitch", "Inverts user input in pitch axis.", false);
-            invertRoll = new MenuCheckboxItem("Invert roll", "Inverts user input in roll axis.", false);
+            invertPitch = new MenuCheckboxItem(_t("DRONE_INVERT_PITCH"), _t("DRONE_INVERT_PITCH_DESC"), false);
+            invertRoll = new MenuCheckboxItem(_t("DRONE_INVERT_ROLL"), _t("DRONE_INVERT_ROLL_DESC"), false);
 
             // Gravity multiplier
             List<string> gravityMultValues = new List<string>();
@@ -103,7 +99,7 @@ namespace CustomCamera
             {
                 gravityMultValues.Add(i.ToString("0.00"));
             }
-            gravityMultList = new MenuListItem("Gravity multiplier", gravityMultValues, 10, "Modifies gravity constant, higher values makes drone fall quicker during freefall.")
+            gravityMultList = new MenuListItem(_t("DRONE_GRAVITY"), gravityMultValues, 10, _t("DRONE_GRAVITY_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -114,7 +110,7 @@ namespace CustomCamera
             {
                 timestepValues.Add(i.ToString("0.00"));
             }
-            timestepMultList = new MenuListItem("Timestep multiplier", timestepValues, 10, "Affects gravity and drone responsiveness.")
+            timestepMultList = new MenuListItem(_t("DRONE_TIMESTEP"), timestepValues, 10, _t("DRONE_TIMESTEP_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -125,7 +121,7 @@ namespace CustomCamera
             {
                 dragMultValues.Add(i.ToString("0.00"));
             }
-            dragMultList = new MenuListItem("Drag multiplier", dragMultValues, 20, "How much air ressistance there is - higher values make drone lose velocity quicker.")
+            dragMultList = new MenuListItem(_t("DRONE_DRAG"), dragMultValues, 20, _t("DRONE_DRAG_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -136,7 +132,7 @@ namespace CustomCamera
             {
                 accelerationMultValues.Add(i.ToString("0.00"));
             }
-            accelerationMultList = new MenuListItem("Acceleration multiplier", accelerationMultValues, 10, "How responsive drone is in terms of acceleration.")
+            accelerationMultList = new MenuListItem(_t("DRONE_ACCELE"), accelerationMultValues, 10, _t("DRONE_ACCELE_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -147,7 +143,7 @@ namespace CustomCamera
             {
                 rotationMultXValues.Add(i.ToString("0.00"));
             }
-            rotationMultXList = new MenuListItem("Pitch multiplier", rotationMultXValues, 10, "How responsive drone is in terms of rotation (pitch).")
+            rotationMultXList = new MenuListItem(_t("DRONE_PITCH"), rotationMultXValues, 10, _t("DRONE_PITCH_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -156,7 +152,7 @@ namespace CustomCamera
             {
                 rotationMultYValues.Add(i.ToString("0.00"));
             }
-            rotationMultYList = new MenuListItem("Roll multiplier", rotationMultYValues, 10, "How responsive drone is in terms of rotation (roll).")
+            rotationMultYList = new MenuListItem(_t("DRONE_ROLL"), rotationMultYValues, 10, _t("DRONE_ROLL_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -165,7 +161,7 @@ namespace CustomCamera
             {
                 rotationMultZValues.Add(i.ToString("0.00"));
             }
-            rotationMultZList = new MenuListItem("Yaw multiplier", rotationMultZValues, 10, "How responsive drone is in terms of rotation (yaw).")
+            rotationMultZList = new MenuListItem(_t("DRONE_YAW"), rotationMultZValues, 10, _t("DRONE_YAW_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -175,7 +171,7 @@ namespace CustomCamera
             {
                 tiltAngleValues.Add(i.ToString("0.0"));
             }
-            tiltAngleList = new MenuListItem("Tilt angle", tiltAngleValues, 9, "Defines how much is camera tilted relative to the drone.")
+            tiltAngleList = new MenuListItem(_t("DRONE_TILT"), tiltAngleValues, 9, _t("DRONE_TILT_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -185,7 +181,7 @@ namespace CustomCamera
             {
                 fovValues.Add(i.ToString("0.0"));
             }
-            fovList = new MenuListItem("FOV", fovValues, 10, "Field of view of the camera")
+            fovList = new MenuListItem(_t("DRONE_FOV"), fovValues, 10, _t("DRONE_FOV_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -195,7 +191,7 @@ namespace CustomCamera
             {
                 maxVelValues.Add(i.ToString("0.0"));
             }
-            maxVelList = new MenuListItem("Max velocity", maxVelValues, 20, "Max velocity of the drone")
+            maxVelList = new MenuListItem(_t("DRONE_MAX_VELOCITY"), maxVelValues, 20, _t("DRONE_MAX_VELOCITY_DESC"))
             {
                 ShowColorPanel = false
             };
@@ -223,14 +219,14 @@ namespace CustomCamera
             #region managing save/load camera stuff
 
             // Saving/Loading cameras
-            MenuItem savedDronesButton = new MenuItem("Saved drones", "User created drone params");
-            savedDronesMenu = new Menu("Saved drone params");
+            MenuItem savedDronesButton = new MenuItem(_t("DRONE_SAVED"), _t("DRONE_SAVED_DESC"));
+            savedDronesMenu = new Menu(_t("DRONE_SAVED_TITLE"));
             MenuController.AddSubmenu(menu, savedDronesMenu);
             menu.AddMenuItem(savedDronesButton);
             savedDronesButton.Label = "→→→";
             MenuController.BindMenuItem(menu, savedDronesMenu, savedDronesButton);
 
-            MenuItem saveDrone = new MenuItem("Save Current Drone", "Save the current drone parameters.");
+            MenuItem saveDrone = new MenuItem(_t("DRONE_SAVE_CURRENT"), _t("DRONE_SAVE_CURRENT_DESC"));
             savedDronesMenu.AddMenuItem(saveDrone);
             savedDronesMenu.OnMenuOpen += (sender) => {
                 savedDronesMenu.ClearMenuItems();
@@ -251,9 +247,9 @@ namespace CustomCamera
             };
 
             MenuController.AddMenu(selectedDroneMenu);
-            MenuItem spawnCamera = new MenuItem("Spawn Drone", "Spawn this saved drone.");
-            MenuItem renameCamera = new MenuItem("Rename Drone", "Rename your saved drone.");
-            MenuItem deleteCamera = new MenuItem("~r~Delete Drone", "~r~This will delete your saved drone. Warning: this can NOT be undone!");
+            MenuItem spawnCamera = new MenuItem(_t("DRONE_SPAWN"), _t("DRONE_SPAWN_DESC"));
+            MenuItem renameCamera = new MenuItem(_t("DRONE_RENAME"), _t("DRONE_RENAME_DESC"));
+            MenuItem deleteCamera = new MenuItem(_t("DRONE_DELETE"), _t("DRONE_DELETE_DESC"));
             selectedDroneMenu.AddMenuItem(spawnCamera);
             selectedDroneMenu.AddMenuItem(renameCamera);
             selectedDroneMenu.AddMenuItem(deleteCamera);
@@ -928,5 +924,9 @@ namespace CustomCamera
         }
 
         #endregion
+
+        private static string _t(string key) {
+            return Language.get(key);
+        }
     }
 }

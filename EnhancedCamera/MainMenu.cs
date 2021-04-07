@@ -5,6 +5,8 @@ using static CitizenFX.Core.Native.API;
 using MenuAPI;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
+using CustomCamera.langs;
 
 namespace CustomCamera
 {
@@ -30,6 +32,7 @@ namespace CustomCamera
         public static float userTilt = 0.0f;
         public static float userYaw = 0.0f;
         public static bool userLookBehind = false;
+        public static Hashtable langData;
 
         #endregion
 
@@ -37,6 +40,24 @@ namespace CustomCamera
         /// Constructor.
         /// </summary>
         public MainMenu() {
+
+            if (langData == null) {
+                // Load language data
+                int langId = GetCurrentLanguage();
+
+                switch (langId) {
+                    case 9:
+                        langData = new zh_TW().data();
+                        break;
+                    case 12:
+                        langData = new zh_CN().data();
+                        break;
+                    default:
+                        langData = new en_US().data();
+                        break;
+                }
+            }
+
             // Disable menu opening via gamepad (interferes with vMenu)
             MenuController.EnableMenuToggleKeyOnController = false;
             // Setup menu open/close key
@@ -92,17 +113,17 @@ namespace CustomCamera
         /// <returns></returns>
         private void CreateSubmenus() {
             // Create the menu.
-            Menu = new Menu("Enhanced camera", "Lead, chase and drone camera options");
+            Menu = new Menu(_t("MAIN_MENU_TITLE"), _t("MAIN_MENU_DESC"));
             MenuController.AddMenu(Menu);
 
             #region checkbox items
 
             // Enabling angular drift cam
-            leadCam = new MenuCheckboxItem("Enable lead camera", "Main camera, behaviour dependant on angular velocity of the car.", false);
+            leadCam = new MenuCheckboxItem(_t("MAIN_MENU_ENABLE_LEAD"), _t("MAIN_MENU_ENABLE_LEAD_DESC"), false);
             // Enabling chase cam
-            chaseCam = new MenuCheckboxItem("Enable chase camera", "Locks to a target in front, switches to regular cam if target not in range.", false);
+            chaseCam = new MenuCheckboxItem(_t("MAIN_MENU_ENABLE_CHASE"), _t("MAIN_MENU_ENABLE_CHASE"), false);
             // Enabling chase cam
-            droneCam = new MenuCheckboxItem("Enable drone camera", "Free drone camera to spectate/fly around. Different modes available.", false);
+            droneCam = new MenuCheckboxItem(_t("MAIN_MENU_ENABLE_DRONE"), _t("MAIN_MENU_ENABLE_DRONE"), false);
 
             #endregion
 
@@ -117,7 +138,7 @@ namespace CustomCamera
             // Custom cam parameters menu
             CustomCamMenu = new CustomCam();
             Menu customCamMenu = CustomCamMenu.GetMenu();
-            MenuItem buttonCustom = new MenuItem("Lead/chase cam parameters", "Tune parameters for lead and chase camera")
+            MenuItem buttonCustom = new MenuItem(_t("MAIN_MENU_LEAD_CHASE_CONF"), _t("MAIN_MENU_LEAD_CHASE_CONF_DESC"))
             {
                 Label = "→→→"
             };
@@ -126,7 +147,7 @@ namespace CustomCamera
             // Drone cam parameters menu
             DroneCamMenu = new DroneCam();
             Menu droneCamMenu = DroneCamMenu.GetMenu();
-            MenuItem buttonDrone = new MenuItem("Drone cam parameters", "Tune parameters for drone camera")
+            MenuItem buttonDrone = new MenuItem(_t("MAIN_MENU_DRONE_CONF"), _t("MAIN_MENU_DRONE_CONF_DESC"))
             {
                 Label = "→→→"
             };
@@ -135,10 +156,7 @@ namespace CustomCamera
                 AddMenu(Menu, droneCamMenu, buttonDrone);
 
             // Credits
-            MenuItem credits = new MenuItem("Credits",  "~g~Shrimp~s~ - idea and execution\n" +
-                                                        "~g~Tom Grobbe~s~ - MenuAPI used for GUI, code snippets for saving/loading\n" +
-                                                        "~g~QuadrupleTurbo~s~ - Help with ideas and testing\n" +
-                                                        "~y~No Name Drift~s~ and ~y~Velocity~s~ drift servers - playtesting and feedback\n") {};
+            MenuItem credits = new MenuItem(_t("MAIN_MENU_CREDITS"),  _t("MAIN_MENU_CREDITS_DESC")) {};
             Menu.AddMenuItem(credits);
 
             #endregion
@@ -476,6 +494,10 @@ namespace CustomCamera
                         break;
                 }
             }
+        }
+
+        private static string _t(string key) {
+            return Language.get(key);
         }
 
         #endregion
